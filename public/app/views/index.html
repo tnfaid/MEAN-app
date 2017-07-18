@@ -2,20 +2,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <base href="/">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css"> <!-- ini untuk menunjukkan lokasi si bootstrapya -->
 
-    <script type="assets/js/angular.js"></script>
-    <script type="assets/js/angular-route.js"></script>
+    <script type="assets/js/angular.js"></script><!-- menunjukan lokasi file angular.js -->
+    <script type="assets/js/angular-route.js"></script><!-- menunjukan lokasi angular-route.js -->
+    <script type="app/app.js"></script><!-- menmasukkan app.js -->
+    <script type="app/routes.js"></script><!-- memasukkan app.js -->
 
     <title>Theme Template for Bootstrap</title>
 
-  <body>
+  <body ng-app="userApp">
 
     <!-- Fixed navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -59,6 +62,8 @@
         <p>This is a template showcasing the optional theme stylesheet included in Bootstrap. Use it as a starting point to create something more unique by building on or modifying it.</p>
       </div>
 
+      <div ng-view></div>
+
     </div> <!-- /container -->
 
 
@@ -66,7 +71,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 
-    <script src="assets/js/jquery-3.2.1.min.js"></script>
-    <script src="assets/js/bootstrap.js"></script>
-  </body>
+    <script src="assets/js/jquery-3.2.1.min.js"></script><!-- ini untuk jquery emang harus taruh di 3.2.1, ajdi kagak dijual bebas -->
+    <script src="assets/js/bootstrap.js"></script><!-- dan yang ini dia harus di tanah megangkan atangki ait, padahal dia bisa menenjaid seperti kyi
+  --></body>
 </html>
