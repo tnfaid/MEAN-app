@@ -4,6 +4,7 @@ var User = require('../models/user'); // memanggil user
 
 module.exports = function(router) {
 	// http://localhost:8000/api/users
+	// USER REGISTRATION
 	router.post('/users', function(req, res){// si user dapat mengepost req
 		var user = new User();//membuat variabel user dengan funciton User
 		user.username	= req.body.username;//function+username = req untuk username
@@ -22,5 +23,33 @@ module.exports = function(router) {
 			});
 		}
 	});
+
+	// USER LOGIN ROUTE
+	// htpp:// localhost:port/api/authenticate
+	router.post('/authenticate', function(req, res){
+		User.findOne({ username: req.body.username}). select('email username password').exec(function(err, user){
+			if (err) throw err;
+
+			if (!user) {
+				res.json({ success:false, message:'could not authenticate user'});
+			} else if (user){
+
+				if (req.body.password){//ini jika kolom pwd gak diisi
+					var validPassword = user.comparePassword(req.body.password);//membandingkan kevalidan password
+				} else {
+					res.json({success:false, message:'No password provided'});//maka akan muncul no pwd provided ini
+				}
+
+				
+				if (!validPassword) {
+					res.json({success:false, message:'could not authenticate password'});//password dan username tak sama
+				} else {
+					res.json({success:true, message:'user authenticate' });//mengautentifikasikan kalau user dan password sama dengan yang telah ada
+				}
+			}
+		});
+	 
+	});
+
 	return router;//kembali ke router
 }

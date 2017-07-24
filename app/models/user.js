@@ -18,6 +18,9 @@ UserSchema.pre('save', function(next) {//ini didapat dari mongoosejs.com dia ada
   	});
 });
 
+UserSchema.methods.comparePassword = function(password){
+	return bcrypt.compareSync(password, this.password);
+};
 
 module.exports = mongoose.model('User', UserSchema);// mengexport module dengan menggunakan User, dan variabel UserSchema, jadi kayak login gitu, dan datanya ada pada variabel UserSchema itu
 

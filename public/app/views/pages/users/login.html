@@ -1,0 +1,31 @@
+<div class="page-header">
+<h1>Login</h1>
+</div>
+
+<form ng-submit="main.doLogin(loginData);"> 
+<!-- jadi untuk register itu adalah controllerAs sedangkan regUser() itu adalah function yang dari userCtrl.js , untuk regData dia adalah object yang mengendalikan form form yang dibawah ini-->
+
+	<!-- username -->
+	<label>Username:</label>
+	<input class="form-control" type="text" name="username" placeholder="please enter username" ng-model="main.loginData.username">
+	<br>
+	<!-- password -->
+	<label>Password</label>
+	<input class="form-control" type="text" name="password" placeholder="please enter password" ng-model="main.loginData.password">
+	<br>
+	<button class="btn btn-primary" type="submit">Login</button>
+</form>
+
+<div class="jumbotron text-center" ng-show="main.loading">
+	<span class="glyphicon glyphicon-repeat spinner"></span>
+	<p>Loading...</p>
+</div>
+
+<br>
+<div class="row show-hide-message" ng-show="main.successMsg">
+	<div class="alert alert-success">{{main.successMsg}}</div>
+</div>
+<br>
+<div class="row show-hide-message" ng-show="main.errorMsg">
+	<div class="alert alert-danger">{{main.errorMsg}} </div> <!-- ini errorMsg di dapat dari userCtrl.js. dan register itu controllerAs ya -->
+</div>
