@@ -10,11 +10,23 @@
     <meta name="author" content="">
 
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css"> <!-- ini untuk menunjukkan lokasi si bootstrapya -->
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
-    <script type="assets/js/angular.js"></script><!-- menunjukan lokasi file angular.js -->
-    <script type="assets/js/angular-route.js"></script><!-- menunjukan lokasi angular-route.js -->
-    <script type="app/app.js"></script><!-- menmasukkan app.js -->
-    <script type="app/routes.js"></script><!-- memasukkan app.js -->
+    <!-- main angular files -->
+    <script src="assets/js/angular.js"></script><!-- menunjukan lokasi file angular.js -->
+    <script src="assets/js/angular-route.js"></script><!-- menunjukan lokasi angular-route.js -->
+    <script src="assets/js/angular-animate.js"></script>
+    
+    <!-- angular config/routes -->
+    <script src="app/app.js"></script><!-- menmasukkan app.js -->
+    <script src="app/routes.js"></script><!-- memasukkan app.js -->
+    
+    <!-- angular controllers -->
+    <script src="app/controllers/userCtrl.js"></script>
+    
+    <!-- angular services -->
+    <script src="app/services/userServices.js"></script>
 
     <title>Theme Template for Bootstrap</title>
 
@@ -34,9 +46,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/register">Register</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu">
