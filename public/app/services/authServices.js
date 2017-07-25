@@ -20,6 +20,11 @@ angular.module('authServices', [])
 		}
 	};
 
+	// Auth.facebook(token);
+	authFactory.facebook = function(token){
+		AuthToken.setToken(token);
+	};
+
 	//Auth.getUser();
 	authFactory.getUser = function(){
 		if(AuthToken.getToken()){
@@ -27,7 +32,7 @@ angular.module('authServices', [])
 		} else {
 			$q.reject({message : ' User has no token'});
 		}
-	}
+	};
 
 	// Auth.logout();
 	authFactory.logout = function(){

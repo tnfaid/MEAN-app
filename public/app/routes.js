@@ -30,6 +30,12 @@ angular.module('appRoutes',['ngRoute'])
 		templateUrl : 'app/views/pages/users/profile.html'
 	})
 
+	.when('/facebook/:token' , {
+		templateUrl : 'app/views/pages/users/social/social.html',
+		controller  : 'facebookCtrl',
+		controllerAs: 'facebook'
+	})
+
 	.otherwise({ redirectTo : '/'});
 	$locationProvider.html5Mode({
 	  enabled: true,

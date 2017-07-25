@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');//--this from expresjs.com
 var router 	= express.Router();
 var appRoutes	= require('./app/routes/api')(router);
 var path	= require('path');
+var passport = require('passport');
+var social = require('./app/passport/passport')(app, passport);
 
 app.use(morgan('dev'));//'dev' digunakan dalam morgan untuk memberikan status seperti kode warna merah untuk kesalahan server, kuning untuk kesalahan klien, cyan untuk pengalihan kode, dan uncolored untuk smua kode lainya.
 app.use(bodyParser.json()); // for parsing application/json

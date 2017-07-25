@@ -29,3 +29,8 @@ angular.module('userControllers', ['userServices'])
 	};
 });
 
+
+.controller('facebookCtrl', function(){
+	// Auth.facebook(token);
+	console.log('testing facebook Ctrl');
+});
