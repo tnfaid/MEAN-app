@@ -1,7 +1,25 @@
 angular.module('mainController', ['authServices'])
 
-.controller('mainCtrl', function(Auth, $timeout, $location){
+.controller('mainCtrl', function(Auth, $timeout, $location, $rootScope){
 	var app= this;
+
+	app.loadme = false;
+
+	$rootScope.$on('$routeChangeStart', function() {//ini fungsi untuk ketika logout langsung logout gitu
+		if (Auth.isLoggedIn()) {
+			app.isLoggedIn = true;
+			Auth.getUser().then(function(data) {
+				app.username = data.data.username;
+				app.useremail = data.data.email;
+				app.loadme	= true;
+			});
+		} else {
+			app.isLoggedIn = false;//ini untuk nampilin menu bar ituloh, jadi nanti bisa muncul atau nggak nya tergantuk dikasih ! atau tidak
+			app.username = '';//dan ini yang langsung ganti usrnamenya langsung hilang ketika logout
+			app.loadme = true;
+		}
+	});
+
 	
 	this.doLogin = function(loginData){//fungsi dari regData dia adalah object yang tersambung dengan yang ada di register.html pada form form nya
 		app.loading = true;
@@ -17,6 +35,8 @@ angular.module('mainController', ['authServices'])
 
 				$timeout(function() {
 					$location.path('/about'); //ini untuk kembali ke home langsung setelah finish registration
+					app.loginData = '';
+					app.successMsg = false;
 				}, 2000);
 
 			} else {
@@ -25,6 +45,14 @@ angular.module('mainController', ['authServices'])
 				app.errorMsg = data.data.message;
 			}
 		});//ini untuk mengepostkan afar bisa terlihat di database
+	};
+
+	this.logout = function (){
+		Auth.logout();//ini untuk funciton logout nya
+		$location.path('/logout');//lokasi logout nya lokasi path lah
+		$timeout(function(){//ini untuk time nya jadi ketika sudah temout
+			$location.path('/');//maka dia akan kembali ke home, dengan status logout
+		}, 2000);//ini time max nya
 	};
 });
 
