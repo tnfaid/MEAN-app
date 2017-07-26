@@ -10,7 +10,7 @@ var UserSchema = new Schema ({ // membuat variabel UserSchema dengna memiliki ob
 });
 
 UserSchema.pre('save', function(next) {//ini didapat dari mongoosejs.com dia adalah serial middleware yang mengexecuted satu setelah yang lainya, ketika middleware dipnaggil 'next', jadi ketika userschema di save maka kodenya otomatis akan dibuat array acak. jadi ini nanti demi keamanan informasi yang telah dibuat oleh user
-  	var user = this;//membuat variabel user dengan isinya this
+  	var user = this;//membuat variabel user dengan isinya this, lebih tepatnya inisialisasi sih :v
   	bcrypt.hash(user.password, null, null, function(err, hash){//di acak array nya , passwordnya nanti munculnya yang enkripsi ituloh, dimana fungsinya terdapat err jika gagal dan hash jik berhasil
   		if (err) return next(err);//jika error maka diulang lagi
   		user.password = hash;//password dari user sudah di hash kan

@@ -25,6 +25,8 @@ module.exports = function(app, passport){
         	});
     	});
 	
+
+		// Facebook Strategy
 		passport.use(new FacebookStrategy({
 		    clientID: '1814914452172038',
 		    clientSecret: 'd657c96c5bcfc16ab0935004f985d121',
@@ -33,26 +35,23 @@ module.exports = function(app, passport){
 		  },
 
 		  function(accessToken, refreshToken, profile, done) {
-		  	console.log(profile);
-		    User.findOne({ email: profile._json.email}).select('username password email').exec(function(err, user) {
-		    	if (err) done(err)
+		  	User.findOne({ email: profile._json.email }).select('username active password email').exec(function(err, user) {
+                if (err) done(err);
 
-		    	if (user && user != null) {
-		    		done(null, user);
-		    	} else {
-		    		done (err);
-		    	}
-		    });
-		    done(null, profile);
+                if (user && user !== null) {
+                    done(null, user);
+                } else {
+                    done(err);//ini jika error maka nanti perginya ya ke facebook error
+                }
+			});
 		  }
 		));
 
-
-		app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/facebookerror' }), function(req, res){
-			res.redirect('/facebook/' + token);	
-		});
-
-		app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
+		// Facebook Routes
+	    app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/facebookerror' }), function(req, res) {
+	        res.redirect('/facebook/' + token); // Redirect user with newly assigned token
+	    });
+	    app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
 
 		return passport;
 }
