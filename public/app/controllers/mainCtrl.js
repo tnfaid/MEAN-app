@@ -1,6 +1,6 @@
 angular.module('mainController', ['authServices'])
 
-.controller('mainCtrl', function(Auth, $timeout, $location, $rootScope){
+.controller('mainCtrl', function(Auth, $timeout, $location, $rootScope, $window){
 	var app= this;
 
 	app.loadme = false;
@@ -18,7 +18,14 @@ angular.module('mainController', ['authServices'])
 			app.username = '';//dan ini yang langsung ganti usrnamenya langsung hilang ketika logout
 			app.loadme = true;
 		}
+		if ($location.hash() == '_=_') $location.hash(null);
 	});
+
+	this.facebook = function(){
+		// console.log($window.location.host);//locahost:8000
+		// console.log($window.location.protocol);//http:
+		$window.location = $window.location.protocol + '//' + $window.location.host + '/auth/facebook';
+	}
 
 	
 	this.doLogin = function(loginData){//fungsi dari regData dia adalah object yang tersambung dengan yang ada di register.html pada form form nya

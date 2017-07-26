@@ -33,8 +33,9 @@ module.exports = function(app, passport){
 		  },
 
 		  function(accessToken, refreshToken, profile, done) {
-		    User.findOne({email: profile._json.email}).select('username password email').exec(function(err, user){
-		    	if (err) done(err);
+		  	console.log(profile);
+		    User.findOne({ email: profile._json.email}).select('username password email').exec(function(err, user) {
+		    	if (err) done(err)
 
 		    	if (user && user != null) {
 		    		done(null, user);
@@ -47,7 +48,7 @@ module.exports = function(app, passport){
 		));
 
 
-		app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), function(req, res){
+		app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/facebookerror' }), function(req, res){
 			res.redirect('/facebook/' + token);	
 		});
 

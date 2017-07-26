@@ -36,6 +36,12 @@ angular.module('appRoutes',['ngRoute'])
 		controllerAs: 'facebook'
 	})
 
+	.when('/facebookerror', {
+		templateUrl : 'app/views/pages/users/login.html',
+		controller  : 'facebookCtrl',
+		controllerAs: 'facebookCtrl'
+	})
+
 	.otherwise({ redirectTo : '/'});
 	$locationProvider.html5Mode({
 	  enabled: true,

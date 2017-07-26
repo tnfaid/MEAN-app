@@ -27,10 +27,16 @@ angular.module('userControllers', ['userServices'])
 			}
 		});//ini untuk mengepostkan afar bisa terlihat di database
 	};
-});
+})
 
 
-.controller('facebookCtrl', function(){
-	// Auth.facebook(token);
-	console.log('testing facebook Ctrl');
+.controller('facebookCtrl', function($routeParams, Auth, $location, $window){//ini untuk login using facebook
+	var app = this;
+
+	if ($window.location.pathname == '/facebookerror'){
+		app.errorMsg = 'facebook e-mail not found in database.';
+	} else {
+		Auth.facebook($routeParams.token);//jadi dia ambil token, 
+		$location.path('/');//langsung kalo udah masuk dia ke home
+	}
 });

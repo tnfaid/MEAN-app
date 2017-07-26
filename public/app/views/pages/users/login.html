@@ -14,7 +14,7 @@
 	<input class="form-control" type="text" name="password" placeholder="please enter password" ng-model="main.loginData.password">
 	<br>
 	<button class="btn btn-primary" type="submit">Login</button>
-	<a href="/auth/facebook" target="_blank"><button type="button" class="btn btn-success">Facebook</button></a>
+	<a ng-click="main.facebook();"><button type="button" class="btn btn-success">Facebook</button></a>
 </form>
 
 <div class="jumbotron text-center" ng-show="main.loading">
@@ -30,3 +30,7 @@
 <div class="row show-hide-message" ng-show="main.errorMsg">
 	<div class="alert alert-danger">{{main.errorMsg}} </div> <!-- ini errorMsg di dapat dari userCtrl.js. dan register itu controllerAs ya -->
 </div>
+<div class="row show-hide-message" ng-show="facebook.errorMsg">
+	<div class="alert alert-danger">{{facebook.errorMsg}} </div> <!-- ini errorMsg di dapat dari userCtrl.js. dan register itu controllerAs ya -->
+</div>
+
