@@ -18,14 +18,29 @@ module.exports = function(router) {
 		} else {//atau jika tidak
 			user.save(function(err){//user akan menyimpan dan menampilkan
 				if (err) {//jika error 
-					if(err.errors.name){
+					if(err.errors != null){
+						if(err.errors.name){
 						res.json({success: false, message: err.errors.name.message});//ini untuk memuncukan di json pesan error di kolom nama
-					} else 	if ( err.errors.email ){
-						res.json({success: false, message: err.errors.email.message});
-					} else if (err.errors.username){
-						res.json({success: false, message: err.errors.username.message});
-					} if (err.errors.password){
-						res.json({success: false, message: err.errors.password.message});
+						} else 	if ( err.errors.email ){
+							res.json({success: false, message: err.errors.email.message});
+						} else if (err.errors.username){
+							res.json({success: false, message: err.errors.username.message});
+						} else if (err.errors.password){
+							res.json({success: false, message: err.errors.password.message});
+						} else {
+							res.json({ success: false, message: err});
+						}
+					} else if (err) {
+						if (err.code == 11000) {// configurate email already taken
+							if (err.errmsg[61] == "u"){
+								res.json({ success: false, message: ' That username already taken'});
+							} else if (err.errmsg[61] == 0) {
+								res.json({ success: false, message: ' That email already taken'});
+							}
+							// res.json({ success: false, message: err.errmsg[61] });
+						} else {
+							res.json({ success: false, message: err});
+						}
 					}
 				} else { //atau
 					res.json({success:true, message: 'success created !'});//muncul pesan user berhasil dibut, jika memang belum ada yang membuat
