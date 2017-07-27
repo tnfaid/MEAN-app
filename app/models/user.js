@@ -47,8 +47,8 @@ var usernameValidator = [
 var passwordValidator = [
   validate({
     validator: 'matches',
-    arguments: /^(([a-zA-Z]{3,20})+[ ]+([a-zA-Z]{3,20})+)+$/, //ini untuk bikin karakter dari akecilsampai besar dengan anyak huru 3-20 dan ada spasi terus bisa diisi huruf lagi, intinya ketentuan penulisan kalian dapat memparaktekan di regexr.com
-    message  : 'Password must be at least 3 characters, max 30, no special character or number, must have space between name.'//kalau tak sama dengan ketentuan akan muncul pesan ini
+    arguments: /^(?=.*?[a-z])(?=.*[A-Z])(?=.*?[\d])(?=.*[\W]).{8,35}$/, //ini untuk bikin karakter dari akecilsampai besar dengan anyak huru 3-20 dan ada spasi terus bisa diisi huruf lagi, intinya ketentuan penulisan kalian dapat memparaktekan di regexr.com
+    message  : 'Password must be at least one lowercase, one uppercase, one number, one special character, and must be at least 8 characters but no more than 35.'//kalau tak sama dengan ketentuan akan muncul pesan ini
   })
 ];
 
