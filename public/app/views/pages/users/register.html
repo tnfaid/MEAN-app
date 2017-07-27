@@ -4,10 +4,14 @@
 
 <form ng-submit="register.regUser(regData);"> 
 <!-- jadi untuk register itu adalah controllerAs sedangkan regUser() itu adalah function yang dari userCtrl.js , untuk regData dia adalah object yang mengendalikan form form yang dibawah ini-->
-
+	
+	<!-- name -->
+	<label>Name:</label>
+	<input class="form-control" type="text" name="name" placeholder="please enter your name" ng-model="register.regData.name">
+	<br>
 	<!-- email -->
 	<label>Email:</label>
-	<input class="form-control" type="text" name="email" placeholder="please enter email" ng-model="register.regData.email">
+	<input class="form-control" type="email" name="email" placeholder="please enter email" ng-model="register.regData.email">
 	<br>
 	<!-- username -->
 	<label>Username:</label>
@@ -15,7 +19,7 @@
 	<br>
 	<!-- password -->
 	<label>Password</label>
-	<input class="form-control" type="text" name="password" placeholder="please enter password" ng-model="register.regData.password">
+	<input class="form-control" type="password" name="password" placeholder="please enter password" ng-model="register.regData.password">
 	<br>
 	<button class="btn btn-primary" type="submit">Register</button>
 </form>

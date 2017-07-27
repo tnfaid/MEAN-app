@@ -11,13 +11,22 @@ module.exports = function(router) {
 		user.username	= req.body.username;//function+username = req untuk username
 		user.password	= req.body.password;//user req password = penempatan req nanti ada di body password
 		user.email		= req.body.email;//user req.email 
+		user.name		= req.body.name;//connect on user.js
 
-		if (req.body.username === null || req.body.username === '' || req.body.password === null || req.body.password === '' || req.body.email === null || req.body.email === '' ){ // ini untuk kondisi jadi dimana salah yang diatas itu sudah terpenuhi maka akan muncul pesan di bawah ini
+		if (req.body.username === null || req.body.username === '' || req.body.password === null || req.body.password === '' || req.body.email === null || req.body.email === '' || req.body.name === null || req.body.name === ''){ // ini untuk kondisi jadi dimana salah yang diatas itu sudah terpenuhi maka akan muncul pesan di bawah ini
 			res.json({success: false , message: 'Pastikan lagi karena username, email, dan password sudah ada'});//so ini buat munculin kayak yang di pesan console ituloh
 		} else {//atau jika tidak
 			user.save(function(err){//user akan menyimpan dan menampilkan
 				if (err) {//jika error 
-					res.json({success: false, message: 'username or email alredy exist'});
+					if(err.errors.name){
+						res.json({success: false, message: err.errors.name.message});//ini untuk memuncukan di json pesan error di kolom nama
+					} else 	if ( err.errors.email ){
+						res.json({success: false, message: err.errors.email.message});
+					} else if (err.errors.username){
+						res.json({success: false, message: err.errors.username.message});
+					} if (err.errors.password){
+						res.json({success: false, message: err.errors.password.message});
+					}
 				} else { //atau
 					res.json({success:true, message: 'success created !'});//muncul pesan user berhasil dibut, jika memang belum ada yang membuat
 				}
