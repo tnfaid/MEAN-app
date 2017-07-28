@@ -9,9 +9,9 @@ angular.module('mainController', ['authServices'])
 		if (Auth.isLoggedIn()) {
 			app.isLoggedIn = true;
 			Auth.getUser().then(function(data) {
-				app.username = data.data.username;
+				app.username  = data.data.username;
 				app.useremail = data.data.email;
-				app.loadme	= true;
+				app.loadme	  = true;
 			});
 		} else {
 			app.isLoggedIn = false;//ini untuk nampilin menu bar ituloh, jadi nanti bisa muncul atau nggak nya tergantuk dikasih ! atau tidak

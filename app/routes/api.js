@@ -31,15 +31,15 @@ module.exports = function(router) {
 							res.json({ success: false, message: err});
 						}
 					} else if (err) {
-						if (err.code == 11000) {// configurate email already taken
-							if (err.errmsg[61] == "u"){
-								res.json({ success: false, message: ' That username already taken'});
-							} else if (err.errmsg[61] == 0) {
-								res.json({ success: false, message: ' That email already taken'});
-							}
-							// res.json({ success: false, message: err.errmsg[61] });
-						} else {
-							res.json({ success: false, message: err});
+						// res.json({ success: false, message: err.errmsg[61]});
+						 if (err.code == 11000) {
+                            if (err.errmsg[61] == "d") {
+                                res.json({ success: false, message: 'That username is already taken' }); // Display error if username already taken
+                            } else{
+                                res.json({ success: false, message: 'That e-mail is already taken' }); // Display error if e-mail already taken
+                            }
+                        } else {
+                            res.json({ success: false, message: err }); // Display any other error
 						}
 					}
 				} else { //atau
@@ -47,7 +47,7 @@ module.exports = function(router) {
 				}
 			});
 		}
-	});
+});
 
 	// USER LOGIN ROUTE
 	// htpp:// localhost:port/api/authenticate
