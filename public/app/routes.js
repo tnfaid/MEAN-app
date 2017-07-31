@@ -62,7 +62,7 @@ app.run(['$rootScope','Auth',function($rootScope, Auth, $location){
 		if (next.$$route.authenticated == true) {
 			if (!Auth.isLoggedIn()) {
 				event.preventDefault();
-				$locaiton.path('/');
+				$location.path('/');
 			}
 
 		} else if (next.$$route.authenticated == false) {
@@ -70,7 +70,7 @@ app.run(['$rootScope','Auth',function($rootScope, Auth, $location){
 				event.preventDefault();
 				$location.path('/profile');
 			}
-			console.log('should not to be authenticated')
+			console.log('should not to be authenticated');
 		} else {
 			// console.log('authenticated does not matter')
 		}

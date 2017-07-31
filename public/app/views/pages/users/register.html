@@ -2,16 +2,33 @@
 <h1>User Registration</h1>
 </div>
 
-<form ng-submit="register.regUser(regData);"> 
+<form name="regForm" ng-submit="register.regUser(regData);" novalidate> 
 <!-- jadi untuk register itu adalah controllerAs sedangkan regUser() itu adalah function yang dari userCtrl.js , untuk regData dia adalah object yang mengendalikan form form yang dibawah ini-->
 	
 	<!-- name -->
-	<label>Name:</label>
-	<input class="form-control" type="text" name="name" placeholder="please enter your name" ng-model="register.regData.name">
+	<div ng-class="{'has-success':(regForm.name.$valid && !regForm.name.$pristine), 'has-error':(!regForm.name.$valid && !regForm.name.$pristine) || (!regForm.name.$valid && regForm.name.$submitted) }">
+		<label>Name:</label>
+		<input class="form-control" type="text" name="name" placeholder="please enter your name" ng-model="register.regData.name" ng-patter="/^(([a-zA-Z]{3,20})+[ ]+([a-zA-Z]{3,20})+)+$/" ng-minlength="3" ng-maxlength="20" required>
+		<p class="hel-block" ng-show="(!regForm.name.$pristine && regForm.name.$error.required) || (regForm.$submitted && regForm.name.$error.required)">This field is required</p>  <!-- ini adalah jika bukan form.nama.$pristine dan dia required form maka akan muncul error-->		
+		<ul ng-show="(!regForm.name.$pristine && regForm.name.$error.pattern) || (!regForm.name.$pristine && regForm.name.$error.minlength) || (!regForm.name.$pristine && regForm.name.$error.maxlength)" class="help-block">
+			<li>Must have a space in between first and last name</li>
+			<li>Must contain sprecial character</li>	
+			<li>Must contain any number</li>	
+			<li>must be at least 3 character but no more than 20</li>	
+		</ul>
+	</div>
 	<br>
 	<!-- email -->
-	<label>Email:</label>
-	<input class="form-control" type="email" name="email" placeholder="please enter email" ng-model="register.regData.email">
+	<div ng-class="{'has-success':(regForm.email.$valid && !regForm.email.$pristine), 'has-error':(!regForm.email.$valid && !regForm.email.$pristine) || (!regForm.email.$valid && regForm.email.$submitted) }">
+		<label>Email:</label>
+		<input class="form-control" type="email" name="email" placeholder="please enter email" ng-model="register.regData.email" ng-patter="/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/" ng-minlength="3" ng-maxlength="25" required>
+		<p class="hel-block" ng-show="(!regForm.email.$pristine && regForm.email.$error.required) || (regForm.$submitted && regForm.email.$error.required)">This field is required</p>  <!-- ini adalah jika bukan form.nama.$pristine dan dia required form maka akan muncul error-->
+		<ul ng-show="(!regForm.email.$pristine && regForm.email.$error.pattern) || (!regForm.email.$pristine && regForm.email.$error.minlength) || (!regForm.email.$pristine && regForm.email.$error.maxlength)" class="help-block">
+			<li>must contain "@"</li>
+			<li>must not contan any special character</li>
+			<li>must be at least 3 character but no more than 25</li>
+		</ul>
+	</div>	
 	<br>
 	<!-- username -->
 	<label>Username:</label>
@@ -23,6 +40,11 @@
 	<br>
 	<button class="btn btn-primary" type="submit">Register</button>
 </form>
+	
+<span><strong>Is this form pristine (new) :</strong>{{regForm.$pristine}}</span><br>
+<span><strong>Does this form have errors:</strong>{{regForm.$error}}</span><br>
+<span><strong>was the form submitted :</strong>{{regForm.$submitted}}</span><br>
+<span><strong>is this form valid :</strong>{{regForm.$valid}}</span><br>
 
 <div class="jumbotron text-center" ng-show="register.loading">
 	<span class="glyphicon glyphicon-repeat spinner"></span>
