@@ -51,7 +51,7 @@
             <li class="active"><a href="/">Home</a></li>
             <li><a ng-show="!main.isLoggedIn" href="/login">Login</a></li>
             <li><a ng-show="!main.isLoggedIn" href="/register">Register</a></li>
-            <li><a ng-show="main.isLoggedIn" href="/register">Add User</a></li>
+            <li><a ng-show="main.isLoggedIn" name="addUser" href="/addUser">Add User</a></li>
             <li><a ng-show="main.isLoggedIn" href="#" ng-click="main.logout();">Logout</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>

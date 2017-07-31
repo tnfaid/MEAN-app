@@ -19,6 +19,14 @@ var app = angular.module('appRoutes',['ngRoute'])
 		authenticated : false
 	})
 
+
+	.when('/addUser',{
+		templateUrl : 'app/views/pages/users/register.html',
+		controller  : 'regCtrl',
+		controllerAs: 'register',
+		authenticated : true
+	})
+
 	.when('/login',{
 		templateUrl : 'app/views/pages/users/login.html',
 		authenticated : false
@@ -55,7 +63,7 @@ var app = angular.module('appRoutes',['ngRoute'])
 	});
 });
 
-app.run(['$rootScope','Auth',function($rootScope, Auth, $location){
+app.run(['$rootScope','Auth','$location', function($rootScope, Auth, $location){
 
 	$rootScope.$on('$routeChangeStart', function(event, next, current){
 
@@ -70,7 +78,7 @@ app.run(['$rootScope','Auth',function($rootScope, Auth, $location){
 				event.preventDefault();
 				$location.path('/profile');
 			}
-			console.log('should not to be authenticated');
+			console.log('should not to be authenticated')
 		} else {
 			// console.log('authenticated does not matter')
 		}

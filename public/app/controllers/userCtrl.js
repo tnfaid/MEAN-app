@@ -4,29 +4,34 @@ angular.module('userControllers', ['userServices'])
 	
 	var app= this;
 
-	this.regUser = function(regData){//fungsi dari regData dia adalah object yang tersambung dengan yang ada di register.html pada form form nya
+	this.regUser = function(regData, valid){//fungsi dari regData dia adalah object yang tersambung dengan yang ada di register.html pada form form nya
 		app.loading = true;
 		app.errorMsg = false;//ini untuk menampilkan kalao errorMsg diawal itu adalah gak muncul
 
+		if (valid) {
+			User.create(app.regData).then(function(data){
+				if (data.data.success) {
+					app.loading = false;
+					// create success message
+					app.successMsg = data.data.message + '....Redirecting';
+					// redirect to home page
 
-		$http.post('api/users', this.regData).then(function(data){//ini untuk mengkoneksikan dengan yang ada di api.js jadi data yang sudah ada bisa terlihat dan akan muncul pesan sudah dibuat kalau memang sudah, sebenarnya bisa terkoneksi karena adanya /users itu tuh 
-			if (data.data.success) {
-				app.loading = false;
-				// create success message
-				app.successMsg = data.data.message + '....Redirecting';
-				// redirect to home page
-
-				$timeout(function() {
-					$location.path('/'); //ini untuk kembali ke home langsung setelah finish registration
-				}, 2000);
-
-			} else {
-				app.loading = false;
-				// create an error message
-				app.errorMsg = data.data.message;
-			}
-		});//ini untuk mengepostkan afar bisa terlihat di database
-	};
+					$timeout(function() {
+						$location.path('/register'); //ini untuk kembali ke home langsung setelah finish registration
+					}, 2000);
+				} else {
+					app.loading = false;
+					// create an error message
+					app.errorMsg = data.data.message;
+				}
+			});	
+		 } else {
+			app.loading = false;
+			// create an error message
+			app.errorMsg = 'please ensure form is filled our properly';
+			console.log(err);
+		}	
+	};//ini untuk mengepostkan afar bisa terlihat di database
 })
 
 
