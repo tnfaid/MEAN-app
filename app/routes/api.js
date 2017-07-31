@@ -47,7 +47,9 @@ module.exports = function(router) {
 				}
 			});
 		}
-});
+	});
+
+
 
 	// USER LOGIN ROUTE
 	// htpp:// localhost:port/api/authenticate
@@ -76,6 +78,34 @@ module.exports = function(router) {
 		});
 	 
 	});
+
+	router.post('/checkusername', function(req, res){
+		User.findOne({ username: req.body.username}). select('email username password').exec(function(err, user){
+			if (err) throw err;
+
+			if(user){
+				res.json({success:false , message: 'That username is aleady taken'});
+			}
+			else {
+				res.json({success:true, message: 'Valid username'})
+			}
+		});
+	});
+
+	router.post('/checkemail', function(req, res){
+		User.findOne({ email: req.body.email}). select('email email password').exec(function(err, user){
+			if (err) throw err;
+
+			if(user){
+				res.json({success:false , message: 'That email is aleady taken'});
+			}
+			else {
+				res.json({success:true, message: 'Valid email'})
+			}
+		});
+	});
+
+	
 
 	router.use(function(req, res, next){//ini bikin router untuk token 
 		var token = req.body.token || req.body.query || req.headers['x-access-token'];//bikin variabel token, dengan identifikasi permintaan token, query, dan headersnya

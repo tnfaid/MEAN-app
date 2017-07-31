@@ -32,6 +32,46 @@ angular.module('userControllers', ['userServices'])
 			console.log(err);
 		}	
 	};//ini untuk mengepostkan afar bisa terlihat di database
+
+
+	this.checkUsername = function(regData) {
+		app.checkingUsername = true;
+		app.usernameMsg = false;
+		app.usernameInvalid = false;
+
+		User.checkUsername(app.regData).then(function(data){
+			if (data.data.success) {
+				app.checkingUsername = false;
+				app.usernameInvalid = false;
+				app.usernameMsg = data.data.message;
+			} else {
+				app.checkingUsername = false;
+				app.usernameInvalid = true;
+				app.usernameMsg = data.data.message
+			}
+		});
+	}
+
+	this.checkEmail = function(regData) {
+		app.checkingEmail = true;
+		app.emailMsg = false;
+		app.EmailInvalid = false;
+
+		User.checkEmail(app.regData).then(function(data){
+			if (data.data.success) {
+				app.checkingEmail = false;
+				app.emailInvalid = false;
+				app.emailMsg = data.data.message;
+			} else {
+				app.checkingEmail = false;
+				app.emailInvalid = true;
+				app.emailMsg = data.data.message
+			}
+		});
+	}
+
+	
+	// User.checkEmail(regData);
 })
 
 

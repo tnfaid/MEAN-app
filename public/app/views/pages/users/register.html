@@ -35,8 +35,9 @@
 	<!-- username -->
 	<div ng-class="{'has-success':(regForm.username.$valid && !regForm.username.$pristine), 'has-error':(!regForm.username.$valid && !regForm.username.$pristine) || (!regForm.username.$valid && regForm.username.$submitted) }">
 		<label>Username:</label>
-		<input class="form-control" type="text" name="username" placeholder="please enter username" ng-model="register.regData.username" ng-minlegth="3" ng-maxlength="25" ng-pattern="/^(?!.*?[\W])(?=.*?[a-zA-Z]|=.*?[A-Z]).{3,16}$/" required>
+		<input class="form-control" type="text" name="username" placeholder="please enter username" ng-model="register.regData.username" ng-minlegth="3" ng-maxlength="25" ng-pattern="/^(?!.*?[\W])(?=.*?[a-zA-Z]|=.*?[A-Z]).{3,16}$/" ng-blur="checkUsername(regData);" required>
 		<p class="help-block" ng-show="(!regForm.username.$pristine && regForm.username.$error.required) || (regForm.$submitted && regForm.username.$error.required)">This field is required</p>  <!-- ini adalah jika bukan form.nama.$pristine dan dia required form maka akan muncul error-->
+		<p class="help-block" ng-show="egister.usernameMsg">{{register.usernameMsg}}</p>
 		<ul ng-show="(!regForm.username.$pristine && regForm.username.$error.pattern) || (!regForm.username.$pristine && regForm.username.$error.minlength) || (!regForm.username.$pristine && regForm.username.$error.maxlength)" class="help-block">
 			<li>Must not contain any special characters or spaces</li>
 			<li>Must be at least 3 characters but no more than 25</li>
