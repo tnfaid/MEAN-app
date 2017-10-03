@@ -6,3 +6,7 @@ this project is about to make user management with rules :
 
 
 I am beginner on there... And anyone, i hope you could help me to fix this :)
+
+#to start 
+1. open cmd
+2. typing nodemon server.js
